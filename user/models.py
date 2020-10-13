@@ -4,10 +4,13 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 # Create your models here.
 
 status_chioces = (
-    (1,'老师'),
-    (0,'学生')
+    (0,'老师'),
+    (1,'学生')
 )
 class User(models.Model):
+    '''
+    用户，用status区分教师学生
+    '''
     id =  models.UUIDField(primary_key = True , auto_created = True , default = uuid.uuid1, editable = False )
     nick_name = models.CharField(max_length=20)
     student_id = models.CharField(max_length=10,blank=True,null=True)
@@ -19,12 +22,18 @@ class User(models.Model):
 
 
 class Scripts(models.Model):
+    '''
+    用户编译成功的代码
+    '''
     submit_time = models.DateTimeField(auto_now=True,editable=False)
     context = models.TextField()
     to_user = models.ForeignKey(to=User,default=None,on_delete=models.CASCADE,related_name='scripts')
     title = models.CharField(max_length=20)
 
 class Task(models.Model):
+    '''
+    老师发布的任务
+    '''
     title = models.CharField(max_length=20)
     descriptions = models.TextField()
     demo_scripts = models.TextField()
