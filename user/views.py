@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from .serializers import *
 from .models import *
-from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.csrf import csrf_exempt,csrf_protect
 from django.http import HttpResponse, JsonResponse
 from rest_framework.renderers import JSONRenderer
 from rest_framework.parsers import JSONParser
@@ -21,6 +21,7 @@ def error(message):
         return JsonResponse(message,safe=False,status=status.HTTP_400_BAD_REQUEST)
     else:
         return JsonResponse(message,safe=False,status=status.HTTP_206_PARTIAL_CONTENT)
+
 
 class Login(APIView):
     '''
