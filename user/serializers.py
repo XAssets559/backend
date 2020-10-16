@@ -17,7 +17,7 @@ class UserSerializer(serializers.ModelSerializer):
 class TaskSerializer(serializers.ModelSerializer):
     class Meta:
         model = Task
-        fields = ['title','descriptions','demo_scripts']
+        fields = ['title','descriptions','demo_scripts','to_user','c_time']
 
 class ScriptSerializer(serializers.ModelSerializer):
     class Meta:

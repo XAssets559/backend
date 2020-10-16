@@ -37,5 +37,5 @@ class Task(models.Model):
     title = models.CharField(max_length=20)
     descriptions = models.TextField()
     demo_scripts = models.TextField()
-    c_time = models.DateField(auto_now=True, editable=False)
+    c_time = models.DateTimeField(auto_now=True, editable=False)
     to_user = models.ForeignKey(to=User,default=None,on_delete=models.CASCADE,related_name='task')

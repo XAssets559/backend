@@ -5,7 +5,9 @@
 # @Software: PyCharm
 
 from django.urls import path,include
+from .views import *
 
 urlpatterns = [
-
+    path('task/',Task_listView.as_view()),
+    path('article/',Article_listView.as_view()),
 ]

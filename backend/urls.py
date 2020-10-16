@@ -21,5 +21,5 @@ from index import urls as index_url
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('user/',include(user_url)),
-    # path('index/',include(index_url)),
+    path('',include(index_url)),
 ]
