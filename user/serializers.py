@@ -14,10 +14,15 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 
-class TaskSerializer(serializers.ModelSerializer):
+class TaskDetialSerializer(serializers.ModelSerializer):
     class Meta:
         model = Task
         fields = ['title','descriptions','demo_scripts','to_user','c_time']
+
+class TaskListSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Task
+        fields = ['title','to_user','c_time']
 
 class ScriptSerializer(serializers.ModelSerializer):
     class Meta:

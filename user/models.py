@@ -12,7 +12,7 @@ class User(models.Model):
     用户，用status区分教师学生
     '''
     id =  models.UUIDField(primary_key = True , auto_created = True , default = uuid.uuid1, editable = False )
-    nick_name = models.CharField(max_length=20)
+    nick_name = models.CharField(max_length=20,unique=True)
     student_id = models.CharField(max_length=10,blank=True,null=True)
     passwords = models.CharField(max_length=20)
     email = models.EmailField()
@@ -27,7 +27,7 @@ class Scripts(models.Model):
     '''
     submit_time = models.DateTimeField(auto_now=True,editable=False)
     context = models.TextField()
-    to_user = models.ForeignKey(to=User,default=None,on_delete=models.CASCADE,related_name='scripts')
+    to_user = models.ForeignKey(to=User,to_field='nick_name',default=None,on_delete=models.CASCADE,related_name='scripts')
     title = models.CharField(max_length=20)
 
 class Task(models.Model):
@@ -38,4 +38,7 @@ class Task(models.Model):
     descriptions = models.TextField()
     demo_scripts = models.TextField()
     c_time = models.DateTimeField(auto_now=True, editable=False)
-    to_user = models.ForeignKey(to=User,default=None,on_delete=models.CASCADE,related_name='task')
+    to_user = models.ForeignKey(to=User,to_field='nick_name',default=None,on_delete=models.CASCADE,related_name='task',verbose_name='出题人',db_column='user_nick_name')
+    class Meta:
+        ordering = ['-c_time']
+

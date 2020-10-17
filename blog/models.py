@@ -12,6 +12,8 @@ class Article(models.Model):
     title = models.CharField(max_length=100)#文章的标题
     des = models.TextField()#文章的描述，用来显示的
     context = models.TextField()
-    author = models.ForeignKey(to=User,default=None,on_delete=models.CASCADE,related_name='article')
+    author = models.ForeignKey(to=User,to_field='nick_name',default=None,on_delete=models.CASCADE,related_name='article')
     zan_num = models.IntegerField(default=0)#点赞数
     c_time = models.DateTimeField(auto_now=True)
+    class Meta:
+        ordering = ['-c_time']

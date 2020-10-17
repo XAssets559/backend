@@ -40,6 +40,7 @@ class Login(APIView):
         try:
             user = User.objects.get(nick_name=data['nick_name'])# 输入是用户名
             if user.passwords == data['passwords']:
+                request.session['nick_name'] = user.nick_name
                 return success()
             else:
                 return error('用户名密码不匹配')# 返回206
@@ -47,6 +48,7 @@ class Login(APIView):
             try:
                 user = User.objects.get(student_id=data['nick_name'])# 如果输入的是学号
                 if user.passwords == data['passwords']:
+                    request.session['nick_name'] = user.nick_name
                     return success()# 返回200
                 else:
                     return error('用户名密码不匹配')  # 返回206
