@@ -14,9 +14,13 @@ from blog.serializers import ArticleDetialSerializer
 
 @api_view(['GET','POST'])
 def task_detial(request,pk):
-    task = Task.objects.get(id = pk)
-    serializer = TaskDetialSerializer(task)
-    return JsonResponse(serializer.data,safe=False)
+    if request.method == 'GET':
+        task = Task.objects.get(id = pk)
+        serializer = TaskDetialSerializer(task)
+        return JsonResponse(serializer.data,safe=False)
+    elif request.method == 'POST':
+        scripts = request.POST
+        return JsonResponse('',safe=False)
 
 
 @api_view(['GET','POST'])

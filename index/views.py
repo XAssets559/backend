@@ -8,6 +8,8 @@ from rest_framework.views import APIView
 from rest_framework import status
 from django.contrib.sessions.models import Session
 
+
+
 # Create your views here.
 class Task_listView(APIView):
     def get(self,request):
@@ -46,5 +48,7 @@ class Article_listView(APIView):
 
 class Test(APIView):
     def get(self,request):
-        request.session['nick_name'] = 'xiahaitao'
-        return JsonResponse(request.COOKIES['sessionid'],safe=False)
+        data = HttpResponse('success').set_cookie('nick_name','xiahaitao')
+        ty = type(data)
+        print(data)
+        return HttpResponse('success')

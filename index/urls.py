@@ -7,6 +7,7 @@
 from django.urls import path,include
 from .views import *
 from .detial_views import *
+from .create_views import *
 
 urlpatterns = [
     path('task/',Task_listView.as_view()),
@@ -14,4 +15,6 @@ urlpatterns = [
     path('',Test.as_view()),
     path('task_detial/<pk>/',task_detial),
     path('article_detial/<pk>/',article_detial),
+    path('task_create/',CreateTask.as_view()),
+    path('article_create/',CreateArticle.as_view()),
 ]
