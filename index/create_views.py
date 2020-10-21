@@ -15,9 +15,9 @@ class CreateTask(APIView):
     def get(self,request):
         return JsonResponse('success',safe=False)
     def post(self,request):
-        sess = Session.objects.get(pk=request.COOKIES['sessionid'])
+        # sess = Session.objects.get(pk=request.COOKIES['sessionid'])
         new_task = request.POST
-        serializer = TaskDetialSerializer(new_task.update({'to_user':sess.get_decoded().get('nick_name')}))
+        serializer = TaskDetialSerializer(new_task.update({'to_user':request.COOKIES['nick_name']}))
         if serializer.is_valid():
             serializer.save()
             return JsonResponse('success',safe=False,status=status.HTTP_200_OK)
