@@ -61,6 +61,8 @@ CORS_ALLOW_CREDENTIALS = True # Cookie跨域
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:3000',
 ]
+SESSION_COOKIE_SAMESITE = 'None'
+
 
 TEMPLATES = [
     {

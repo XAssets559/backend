@@ -48,7 +48,8 @@ class Article_listView(APIView):
 
 class Test(APIView):
     def get(self,request):
-        data = HttpResponse('success').set_cookie('nick_name','xiahaitao')
-        ty = type(data)
-        print(data)
-        return HttpResponse('success')
+        response = JsonResponse('success',safe=False,status=200)
+        response.set_cookie('nick_name','xiahaitao')
+        # ty = type(data)
+        # print(data)
+        return response
