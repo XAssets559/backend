@@ -62,6 +62,10 @@ CORS_ALLOWED_ORIGINS = [
     'http://localhost:3000',
 ]
 SESSION_COOKIE_SAMESITE = 'None'
+from corsheaders.defaults import default_headers
+CORS_ALLOW_HEADERS = list(default_headers) + [
+    'withCredentials',
+]
 
 
 TEMPLATES = [
