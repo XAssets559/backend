@@ -41,7 +41,9 @@ class Login(APIView):
             user = User.objects.get(nick_name=data['nick_name'])# 输入是用户名
             if user.passwords == data['passwords']:
                 request.COOKIES['nick_name'] = user.nick_name
-                return success()
+                response = JsonResponse('success',safe=False,status=200)
+                response.set_cookie('nick_name',user.nick_name)
+                return response
             else:
                 return error('用户名密码不匹配')# 返回206
         except:
