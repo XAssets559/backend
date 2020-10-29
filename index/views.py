@@ -6,6 +6,7 @@ from blog.serializers import ArticleListSerializer
 from django.http import HttpResponse,JsonResponse
 from rest_framework.views import APIView
 from rest_framework import status
+from rest_framework.parsers import JSONParser
 from django.contrib.sessions.models import Session
 
 
@@ -15,12 +16,11 @@ class Task_listView(APIView):
     def get(self,request):
         change = False#用来判断是否是编辑页面
         try:#教师后台页面的任务管理列表
-            change = request.GET['change']
-            sess = Session.objects.get(pk=request.COOKIES['sessionid'])
-            user = User.objects.get(nick_name=sess.get_decoded().get('nick_name'))
+            change = JSONParser().parse(request)['change']
+            user = User.objects.get(nick_name=request.COOKIES['nick_name'])
             task_set = user.task.all()
             serializer = TaskListSerializer(task_set, many=True)
-            return  JsonResponse(serializer,safe=False,status=status.HTTP_200_OK)
+            return  JsonResponse(serializer.data,safe=False,status=status.HTTP_200_OK)
         except:#主页的任务列表
             task_set = Task.objects.all()#返回所有的任务
             serializer = TaskListSerializer(task_set,many=True)
@@ -33,8 +33,7 @@ class Article_listView(APIView):
         change = False
         try:#自己的文章编辑页面的列表
             change = request.GET['change']
-            sess = Session.objects.get(pk=request.COOKIES['sessionid'])
-            user = User.objects.get(nick_name=sess.get_decoded().get('nick_name'))
+            user = User.objects.get(nick_name=request.COOKIES['nick_name'])
             article_set = user.article.all()
             serializer = ArticleListSerializer(article_set,many=True)
             return JsonResponse(serializer.data, safe=False,status=status.HTTP_200_OK)

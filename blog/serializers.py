@@ -10,7 +10,7 @@ from .models import *
 class ArticleDetialSerializer(serializers.ModelSerializer):
     class Meta:
         model = Article
-        fields = ['id','title','des','context','author','c_time']
+        fields = ['title','des','context','author','c_time']
 
 class ArticleListSerializer(serializers.ModelSerializer):
     class Meta:

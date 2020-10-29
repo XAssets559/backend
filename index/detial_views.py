@@ -11,6 +11,10 @@ from user.models import Task
 from user.serializers import TaskDetialSerializer
 from blog.models import Article
 from blog.serializers import ArticleDetialSerializer
+from rest_framework.parsers import JSONParser
+import subprocess
+def bianyi(scripts):
+    pass
 
 @api_view(['GET','POST'])
 def task_detial(request,pk):
@@ -19,12 +23,14 @@ def task_detial(request,pk):
         serializer = TaskDetialSerializer(task)
         return JsonResponse(serializer.data,safe=False)
     elif request.method == 'POST':
-        scripts = request.POST
+        scripts = JSONParser().parse(request)
+        bianyi(scripts['scripts'])
         return JsonResponse('',safe=False)
 
 
 @api_view(['GET','POST'])
 def article_detial(request,pk):
-    article = Article.objects.get(id = pk)
-    serializer = ArticleDetialSerializer(article)
-    return JsonResponse(serializer.data,safe=False)
+    if request.method =='GET':
+        article = Article.objects.get(id = pk)
+        serializer = ArticleDetialSerializer(article)
+        return JsonResponse(serializer.data,safe=False)

@@ -22,7 +22,7 @@ class TaskDetialSerializer(serializers.ModelSerializer):
 class TaskListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Task
-        fields = ['title','to_user','c_time']
+        fields = ['id','title','to_user','c_time']
 
 class ScriptSerializer(serializers.ModelSerializer):
     class Meta:
